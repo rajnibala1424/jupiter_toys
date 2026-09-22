@@ -14,4 +14,11 @@ export class ShopPage extends BasePage {
     const product = this.page.locator('.product').filter({ hasText: productName });
     await product.getByRole('link', { name: 'Buy' }).click();
   }
+
+  async buyFirstProduct(): Promise<string> {
+    const product = this.page.locator('.product').first();
+    const productName = (await product.locator('h4, h3, .product-name').first().innerText()).trim();
+    await product.getByRole('link', { name: 'Buy' }).click();
+    return productName;
+  }
 }
