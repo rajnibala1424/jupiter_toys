@@ -1,0 +1,17 @@
+{
+  "name": "jupitertoys-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright end-to-end tests for Jupiter Toys",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.3",
+    "dotenv": "^17.2.2",
+    "typescript": "^7.0.2"
+  }
+}
