@@ -24,6 +24,10 @@ export class ContactPage extends BasePage {
     await this.page.getByLabel('Message *').fill(message);
   }
 
+  async fillTelephone(telephone: string): Promise<void> {
+    await this.page.getByLabel('Telephone').fill(telephone);
+  }
+
   async expectRequiredFieldErrors(): Promise<void> {
     await expect(this.page.getByText('Forename is required')).toBeVisible();
     await expect(this.page.getByText('Email is required')).toBeVisible();
@@ -32,6 +36,14 @@ export class ContactPage extends BasePage {
 
   async expectInvalidEmailError(): Promise<void> {
     await expect(this.page.getByText('Please enter a valid email')).toBeVisible();
+  }
+
+  async expectMessageLengthError(): Promise<void> {
+    await expect(this.page.getByText(/message.*(too long|maximum|limit)/i)).toBeVisible();
+  }
+
+  async expectInvalidTelephoneError(): Promise<void> {
+    await expect(this.page.getByText(/telephone.*(valid|invalid|required)/i)).toBeVisible();
   }
 
   async expectSubmissionSuccess(forename: string): Promise<void> {

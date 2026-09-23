@@ -9,7 +9,7 @@ export function getCredentials(): { username: string; password: string } {
 
   if (!username || !password) {
     throw new Error(
-      'Missing JUPITER_USERNAME or JUPITER_PASSWORD. Add them to e2e/.env.',
+      'Missing JUPITER_USERNAME or JUPITER_PASSWORD. Add them to e2e/.env.cred.',
     );
   }
 

@@ -3,7 +3,7 @@ import { CartPage } from '../pages/cart.page';
 import { ShopPage } from '../pages/shop.page';
 
 test.describe('Cart functionality', () => {
-  test('cart page loads successfully', async ({ page }) => {
+  test('cart page loads successfully @smoke', async ({ page }) => {
     const cartPage = new CartPage(page);
 
     await cartPage.openCart();
@@ -11,7 +11,7 @@ test.describe('Cart functionality', () => {
     await page.getByRole('link', { name: /Cart \(\d+\)/ }).isVisible();
   });
 
-  test('added product is listed in the cart', async ({ page }) => {
+  test('added product is listed in the cart @smoke', async ({ page }) => {
     const shopPage = new ShopPage(page);
     const cartPage = new CartPage(page);
 
@@ -74,7 +74,7 @@ test.describe('Cart functionality', () => {
     await cartPage.expectTotalVisible();
   });
 
-  test('checkout link redirects to the checkout screen', async ({ page }) => {
+  test('checkout link redirects to the checkout screen @smoke', async ({ page }) => {
     const shopPage = new ShopPage(page);
     const cartPage = new CartPage(page);
 

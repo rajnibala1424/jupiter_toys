@@ -6,11 +6,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: [['html', { open: 'always' }]],
+  reporter: [['html', { open: process.env.CI ? 'never' : 'always' }]],
   use:{
     //capture screenshots and videos for failures
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    video: process.env.CI ? 'off' : 'retain-on-failure',
     baseURL: 'https://jupiter.cloud.planittesting.com/#/',
     trace: 'retain-on-failure',
   },

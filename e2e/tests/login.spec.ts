@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/login.page';
 import { getCredentials } from '../utils/credentials';
 
 test.describe('Login functionality', () => {
-  test('login form loads successfully', async ({ page }) => {
+  test('login form loads successfully @smoke', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await page.goto('');
@@ -11,7 +11,7 @@ test.describe('Login functionality', () => {
     await loginPage.expectLoginFormVisible();
   });
 
-  test('user can log in with valid credentials', async ({ page }) => {
+  test('user can log in with valid credentials @smoke', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const credentials = getCredentials();
 

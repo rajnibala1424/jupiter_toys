@@ -22,12 +22,6 @@ export class LoginPage extends BasePage {
     await this.page.getByRole('button', { name: 'Login' }).click();
   }
 
-  async login(username: string, password: string): Promise<void> {
-    await this.openLoginDialog();
-    await this.fillCredentials(username, password);
-    await this.submit();
-  }
-
   async expectLoginError(message: string): Promise<void> {
     await expect(this.page.getByText(message)).toBeVisible();
   }
