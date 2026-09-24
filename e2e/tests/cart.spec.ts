@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { CartPage } from '../pages/cart.page';
 import { ShopPage } from '../pages/shop.page';
+import { cartTestData } from '../utils/test-data';
 
 test.describe('Cart functionality', () => {
   test('cart page loads successfully @smoke', async ({ page }) => {
@@ -39,7 +40,7 @@ test.describe('Cart functionality', () => {
     await shopPage.openShop();
     const productName = await shopPage.buyFirstProduct();
     await cartPage.openCart();
-    await cartPage.updateProductQuantity(productName, 2);
+    await cartPage.updateProductQuantity(productName, cartTestData.updatedQuantity);
     await cartPage.expectProductInCart(productName);
     await cartPage.expectTotalVisible();
   });
@@ -50,7 +51,16 @@ test.describe('Cart functionality', () => {
 
     await shopPage.openShop();
     const firstProduct = await shopPage.buyFirstProduct();
-    await shopPage.buyProduct((await page.locator('.product').nth(1).locator('h4, h3, .product-name').first().innerText()).trim());
+    await shopPage.buyProduct(
+      (
+        await page
+          .locator('.product')
+          .nth(cartTestData.secondProductIndex)
+          .locator('h4, h3, .product-name')
+          .first()
+          .innerText()
+      ).trim(),
+    );
     await cartPage.openCart();
     await cartPage.expectProductInCart(firstProduct);
     await cartPage.checkout();

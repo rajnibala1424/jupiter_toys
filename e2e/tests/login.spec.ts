@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
 import { getCredentials } from '../utils/credentials';
+import { loginTestData } from '../utils/test-data';
 
 test.describe('Login functionality', () => {
   test('login form loads successfully @smoke', async ({ page }) => {
@@ -27,9 +28,9 @@ test.describe('Login functionality', () => {
 
     await page.goto('');
     await loginPage.openLoginDialog();
-    await loginPage.fillCredentials('invalid-user', credentials.password);
+    await loginPage.fillCredentials(loginTestData.invalidUsername, credentials.password);
     await loginPage.submit();
-    await loginPage.expectLoginError('Your login details are incorrect');
+    await loginPage.expectLoginError(loginTestData.invalidCredentialsError);
   });
 
   test('invalid password displays an error', async ({ page }) => {
@@ -38,9 +39,9 @@ test.describe('Login functionality', () => {
 
     await page.goto('');
     await loginPage.openLoginDialog();
-    await loginPage.fillCredentials(credentials.username, 'invalid-password');
+    await loginPage.fillCredentials(credentials.username, loginTestData.invalidPassword);
     await loginPage.submit();
-    await loginPage.expectLoginError('Your login details are incorrect');
+    await loginPage.expectLoginError(loginTestData.invalidCredentialsError);
   });
 
   test('empty username displays an error', async ({ page }) => {
@@ -49,9 +50,9 @@ test.describe('Login functionality', () => {
 
     await page.goto('');
     await loginPage.openLoginDialog();
-    await loginPage.fillCredentials('', credentials.password);
+    await loginPage.fillCredentials(loginTestData.emptyUsername, credentials.password);
     await loginPage.submit();
-    await loginPage.expectLoginError('Your login details are incorrect');
+    await loginPage.expectLoginError(loginTestData.invalidCredentialsError);
   });
 
   test('empty password displays an error', async ({ page }) => {
@@ -60,8 +61,8 @@ test.describe('Login functionality', () => {
 
     await page.goto('');
     await loginPage.openLoginDialog();
-    await loginPage.fillCredentials(credentials.username, '');
+    await loginPage.fillCredentials(credentials.username, loginTestData.emptyPassword);
     await loginPage.submit();
-    await loginPage.expectLoginError('Your login details are incorrect');
+    await loginPage.expectLoginError(loginTestData.invalidCredentialsError);
   });
 });
