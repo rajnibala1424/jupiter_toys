@@ -56,7 +56,7 @@ The test describes the behavior, while selectors and page interactions remain in
 From the `e2e` directory:
 
 ```powershell
-cd C:\Users\rbala\Documents\jupitertoys_ai\e2e
+cd e2e
 npm install
 npx playwright install
 ```
